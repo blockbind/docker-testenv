@@ -1,6 +1,7 @@
 name: Build and publish test environment
 
 on:
+  workflow_dispatch: { }
   repository_dispatch:
     types: [ blockbind ]
 
