@@ -11,7 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: "${GH_TOKEN}"
+          repository: blockbind/docker-testenv
+          token: ${{ secrets.GH_TOKEN }}
       - name: Pull & update submodules recursively
         run: |
           git submodule update --init --recursive
