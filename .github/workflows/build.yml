@@ -15,8 +15,10 @@ jobs:
           java-version: 17
       - name: Build project
         run: |
+          echo $PWD
           cd blockbind
-          mvn package --file pom.xml
+          echo $PWD
+          mvn package
       - name: Prepare artifact
         run: |
           mkdir artifact
