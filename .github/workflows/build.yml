@@ -18,6 +18,24 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+      - name: Spigot Buildtools 1.16.5
+        run: |
+          mkdir buildtools && cd buildtools
+          wget "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+          java -jar BuildTools.jar --rev 1.16.5
+          cd Bukkit && mvn clean install && cd ..
+          cd Spigot && mvn clean install && cd ..
+          cd CraftBukkit && mvn clean install && cd ..
+          cd .. && rm -rf buildtools
+      - name: Spigot Buildtools 1.18
+        run: |
+          mkdir buildtools && cd buildtools
+          wget "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+          java -jar BuildTools.jar --rev 1.18
+          cd Bukkit && mvn clean install && cd ..
+          cd Spigot && mvn clean install && cd ..
+          cd CraftBukkit && mvn clean install && cd ..
+          cd .. && rm -rf buildtools
       - name: Build project
         run: |
           git submodule update --init --recursive
