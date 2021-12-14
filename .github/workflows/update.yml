@@ -1,6 +1,7 @@
 name: Update test environment
 
 on:
+  workflow_dispatch: { }
   schedule:
     - cron: "* */1 * * *"
 
@@ -9,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: "${GH_TOKEN}"
       - name: Pull & update submodules recursively
         run: |
           git submodule update --init --recursive
