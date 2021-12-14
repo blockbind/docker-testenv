@@ -1,0 +1,3 @@
+[submodule "blockbind"]
+	path = blockbind
+	url = git@github.com:blockbind/blockbind.git

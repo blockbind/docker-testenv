@@ -1,0 +1,66 @@
+version: "3.2"
+
+services:
+  blockbind-redis:
+    image: "redis:alpine"
+    container_name: "blockbind-redis"
+    restart: always
+    command: "redis-server --requirepass ${BLOCKBIND_REDIS_PASSWORD}"
+    volumes:
+      - "$PWD/redis-data:/var/lib/redis"
+      - "$PWD/redis.conf:/usr/local/etc/redis/redis.conf"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - BLOCKBIND_REDIS_PASSWORD="${BLOCKBIND_REDIS_PASSWORD}"
+
+  blockbind-mc01:
+    image: "itzg/minecraft-server:java17"
+    container_name: "blockbind-mc01"
+    restart: always
+    tty: true
+    stdin_open: true
+    ports:
+      - "25570:25565"
+    volumes:
+      - "./mc01-data:/data"
+    environment:
+      MODPACK: "https://cerus.dev/modpack.zip"
+      REPLACE_ENV_IN_PLACE: "true"
+      REPLACE_ENV_DURING_SYNC: "true"
+      REPLACE_ENV_VARIABLE_PREFIX: "BLOCKBIND_"
+      JVM_OPTS: "--add-opens java.base/java.net=ALL-UNNAMED"
+      JVM_DD_OPTS: "Paper.IgnoreJavaVersion:true"
+      TYPE: "PAPER"
+      VERSION: "1.16.5"
+      EULA: "true"
+      TZ: "Europe/Berlin"
+      MEMORY: "2G"
+      MOTD: "Block Bind Test #1"
+      BLOCKBIND_SERVER_NAME: "mc01"
+      BLOCKBIND_REDIS_PASSWORD: "${BLOCKBIND_REDIS_PASSWORD}"
+
+  blockbind-mc02:
+    image: "itzg/minecraft-server:java17"
+    container_name: "blockbind-mc02"
+    restart: always
+    tty: true
+    stdin_open: true
+    ports:
+      - "25575:25565"
+    volumes:
+      - "./mc02-data:/data"
+    environment:
+      MODPACK: "https://cerus.dev/modpack.zip"
+      REPLACE_ENV_IN_PLACE: "true"
+      REPLACE_ENV_DURING_SYNC: "true"
+      REPLACE_ENV_VARIABLE_PREFIX: "BLOCKBIND_"
+      JVM_OPTS: "--add-opens java.base/java.net=ALL-UNNAMED"
+      JVM_DD_OPTS: "Paper.IgnoreJavaVersion:true"
+      TYPE: "PAPER"
+      VERSION: "1.16.5"
+      EULA: "true"
+      TZ: "Europe/Berlin"
+      MEMORY: "2G"
+      MOTD: "Block Bind Test #2"
+      BLOCKBIND_SERVER_NAME: "mc02"
+      BLOCKBIND_REDIS_PASSWORD: "${BLOCKBIND_REDIS_PASSWORD}"

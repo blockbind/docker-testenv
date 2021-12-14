@@ -1,0 +1,8 @@
+redis:
+  url: "redis://${BLOCKBIND_REDIS_PASSWORD}@blockbind-redis"
+
+server:
+  name: "${BLOCKBIND_SERVER_NAME}"
+
+compression:
+  use-zstd: true

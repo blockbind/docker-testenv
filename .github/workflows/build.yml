@@ -1,0 +1,39 @@
+name: Build and publish test environment
+
+on:
+  repository_dispatch:
+    types: [ blockbind ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Build project
+        run: |
+          cd blockbind
+          mvn package --file pom.xml
+      - name: Prepare artifact
+        run: |
+          mkdir artifact
+          cp target/*.jar artifact/
+          cp -r include/* artifact/
+          zip -r testenv.zip artifact/*
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: artifact/
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "${GITHUB_SHA}"
+          files: |
+            testenv.zip
+            docker-compose.yml
