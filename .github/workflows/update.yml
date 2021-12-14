@@ -13,6 +13,7 @@ jobs:
         with:
           repository: blockbind/docker-testenv
           token: ${{ secrets.GH_TOKEN }}
+          submodules: true
       - name: Pull & update submodules recursively
         run: |
           git submodule update --init --recursive
