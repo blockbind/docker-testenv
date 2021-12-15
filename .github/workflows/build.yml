@@ -52,7 +52,7 @@ jobs:
       - name: Prepare artifact
         run: |
           mkdir artifact
-          cp blockbind/target/blockbind-bukkit.jar artifact/
+          cp blockbind/bukkit/target/blockbind-bukkit.jar artifact/
           cp -r include/* artifact/
           zip -r testenv.zip artifact/*
       - name: Upload artifact
