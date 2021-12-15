@@ -24,7 +24,7 @@ services:
     volumes:
       - "./mc01-data:/data"
     environment:
-      MODPACK: "https://cerus.dev/modpack.zip"
+      MODPACK: "https://github.com/blockbind/docker-testenv/releases/download/latest/testenv.zip"
       REPLACE_ENV_IN_PLACE: "true"
       REPLACE_ENV_DURING_SYNC: "true"
       REPLACE_ENV_VARIABLE_PREFIX: "BLOCKBIND_"
@@ -50,7 +50,7 @@ services:
     volumes:
       - "./mc02-data:/data"
     environment:
-      MODPACK: "https://cerus.dev/modpack.zip"
+      MODPACK: "https://github.com/blockbind/docker-testenv/releases/download/latest/testenv.zip"
       REPLACE_ENV_IN_PLACE: "true"
       REPLACE_ENV_DURING_SYNC: "true"
       REPLACE_ENV_VARIABLE_PREFIX: "BLOCKBIND_"
