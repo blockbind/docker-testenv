@@ -69,3 +69,4 @@ jobs:
           files: |
             testenv.zip
             docker-compose.yml
+            .env
