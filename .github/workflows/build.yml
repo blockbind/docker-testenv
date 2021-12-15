@@ -70,3 +70,4 @@ jobs:
             testenv.zip
             docker-compose.yml
             .env
+            install.sh
