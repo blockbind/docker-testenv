@@ -45,7 +45,7 @@ jobs:
           cd .. && rm -rf buildtools
       - name: Build project
         run: |
-          git clone git@github.com:blockbind/blockbind.git
+          git clone https://github.com/blockbind/blockbind
           cd blockbind
           mvn package
           cd ..
