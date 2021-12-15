@@ -16,8 +16,7 @@ jobs:
           submodules: true
       - name: Pull & update submodules recursively
         run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
+          git submodule update --remote --merge
       - name: Commit & push changes
         run: |
           git commit -am "Update submodules"

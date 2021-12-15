@@ -41,7 +41,7 @@ jobs:
           cd .. && rm -rf buildtools
       - name: Build project
         run: |
-          git submodule update --init --recursive
+          git submodule update --remote --merge
           echo $PWD
           cd blockbind
           echo $PWD
