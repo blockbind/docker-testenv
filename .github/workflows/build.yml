@@ -26,15 +26,14 @@ jobs:
           cd Bukkit && mvn clean install && cd ..
           cd Spigot && mvn clean install && cd ..
           cd CraftBukkit && mvn clean install && cd ..
-          cd .. && rm -rf buildtools
+          cd ..
       - name: Set up JDK 17
         uses: actions/setup-java@v1
         with:
           java-version: 17
       - name: Spigot Buildtools 1.18
         run: |
-          mkdir buildtools && cd buildtools
-          wget "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+          cd buildtools
           java -jar BuildTools.jar --rev 1.18
           cd Bukkit && mvn clean install && cd ..
           cd Spigot && mvn clean install && cd ..
