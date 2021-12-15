@@ -5,6 +5,10 @@ on:
   repository_dispatch:
     types: [ blockbind ]
 
+concurrency:
+  group: "main"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,16 +45,14 @@ jobs:
           cd .. && rm -rf buildtools
       - name: Build project
         run: |
-          git submodule update --remote --merge
-          echo $PWD
+          git clone git@github.com:blockbind/blockbind.git
           cd blockbind
-          echo $PWD
-          ls
           mvn package
+          cd ..
       - name: Prepare artifact
         run: |
           mkdir artifact
-          cp target/*.jar artifact/
+          cp blockbind/target/blockbind-bukkit.jar artifact/
           cp -r include/* artifact/
           zip -r testenv.zip artifact/*
       - name: Upload artifact
