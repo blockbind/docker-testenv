@@ -65,7 +65,10 @@ jobs:
           mkdir artifact
           cp blockbind/bukkit/target/blockbind-bukkit.jar artifact/
           cp -r include/* artifact/
-          zip -r testenv.zip artifact/*
+          cd artifact
+          zip -r testenv.zip ./*
+          mv testenv.zip ../
+          cd ..
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
